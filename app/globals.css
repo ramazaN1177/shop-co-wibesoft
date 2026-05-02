@@ -1,0 +1,20 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap');
+@import "tailwindcss";
+@theme inline {
+  --font-integral: "Integral CF", "Arial Black", sans-serif;
+  --font-satoshi: "Satoshi", sans-serif;
+}
+
+@font-face {
+  font-family: 'Integral CF';
+  src: local('Arial Black');
+  font-weight: 700;
+  font-style: normal;
+}
+
+html, body {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  color-scheme: light !important;
+  font-family: var(--font-satoshi) !important;
+}
