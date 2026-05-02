@@ -1,60 +1,105 @@
 import ProductCard from "../productCard/ProductCard";
 
-const DUMMY_PRODUCTS = [
-  {
-    id: 1,
-    name: "T-shirt with Tape Details",
-    rating: 4.5,
-    price: 120,
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500&auto=format&fit=crop", // Örnek resim, daha sonra gerçek ürün resimleriyle değiştirilecek
-  },
-  {
-    id: 2,
-    name: "Skinny Fit Jeans",
-    rating: 3.5,
-    price: 240,
-    originalPrice: 260,
-    discountPercentage: 20,
-    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500&auto=format&fit=crop",
-  },
-  {
-    id: 3,
-    name: "Checkered Shirt",
-    rating: 4.5,
-    price: 180,
-    image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=500&auto=format&fit=crop",
-  },
-  {
-    id: 4,
-    name: "Sleeve Striped T-shirt",
-    rating: 4.5,
-    price: 130,
-    originalPrice: 160,
-    discountPercentage: 30,
-    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500&auto=format&fit=crop",
-  }
-];
+interface ApiProduct {
+  _id: number;
+  title: string;
+  price: number;
+  oldPrice?: string;
+  image: string;
+  rating: number;
+}
 
-export default function MainComponent() {
+// API'den ürünleri çeken fonksiyon (Sunucu Tarafında Çalışır)
+async function getProducts(): Promise<ApiProduct[]> {
+  try {
+    const res = await fetch(process.env.NEXT_PRODUCTS_API_URL as string, {
+      next: { revalidate: 3600 } // 1 saat boyunca önbellekte tutar (hızlı yükleme için)
+    });
+    
+    if (!res.ok) {
+      throw new Error("Ürünler getirilemedi");
+    }
+    
+    const json = await res.json();
+    return json.data || [];
+  } catch (error) {
+    console.error("API Hatası:", error);
+    return [];
+  }
+}
+
+export default async function MainComponent() {
+  // Veriyi çekiyoruz
+  const apiProducts = await getProducts();
+
+  // API'den gelen veriyi bizim ProductCard bileşeninin beklediği yapıya dönüştürüyoruz
+  const formattedProducts = apiProducts.map((p) => {
+    const oldPriceNum = p.oldPrice ? parseFloat(p.oldPrice) : undefined;
+    let discountPercentage;
+    
+    // Eğer eski fiyat varsa ve mevcut fiyattan büyükse indirim oranını hesapla
+    if (oldPriceNum && oldPriceNum > p.price) {
+      discountPercentage = Math.round(((oldPriceNum - p.price) / oldPriceNum) * 100);
+    }
+
+    return {
+      id: p._id,
+      name: p.title,
+      price: p.price,
+      originalPrice: oldPriceNum && oldPriceNum > p.price ? oldPriceNum : undefined,
+      discountPercentage,
+      image: p.image,
+      rating: p.rating,
+    };
+  });
+
+  // İlk 4 ürünü "NEW ARRIVALS" için alıyoruz
+  const newArrivals = formattedProducts.slice(0, 4);
+  // Sonraki 4 ürünü "TOP SELLING" için alıyoruz
+  const topSelling = formattedProducts.slice(4, 8);
+
   return (
     <div className="w-full flex flex-col gap-[55px] pb-[64px]">
-      <h2 className="text-[32px] md:text-[48px] font-bold font-integral text-black leading-none mt-10 md:mt-16 text-center uppercase">
+      
+      {/* --- NEW ARRIVALS BÖLÜMÜ --- */}
+      <h2 className="text-[32px] md:text-[48px] font-bold font-integral text-black leading-none mt-4 md:mt-8 text-center uppercase">
         NEW ARRIVALS
       </h2>
 
-      {/* Ürün Listesi Grid'i */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[20px] px-4 md:px-[100px]">
-        {DUMMY_PRODUCTS.map((product) => (
-          <ProductCard key={product.id} product={product} />
+        {newArrivals.map((product) => (
+          <ProductCard key={`new-${product.id}`} product={product} />
         ))}
       </div>
       
-      {/* View All Butonu */}
       <div className="flex justify-center mt-[36px]">
         <button className="px-[54px] py-[16px] rounded-[62px] border border-black/10 text-black font-medium text-[16px] leading-[22px] hover:bg-gray-50 transition-colors">
           View All
         </button>
       </div>
+
+      {/* --- AYIRICI ÇİZGİ --- */}
+      <div className="w-full px-4 md:px-[100px] mt-[10px] mb-[10px]">
+        <hr className="border-t border-black/10" />
+      </div>
+
+      {/* --- TOP SELLING BÖLÜMÜ --- */}
+      <h2 className="text-[32px] md:text-[48px] font-bold font-integral text-black leading-none text-center uppercase">
+        TOP SELLING
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[20px] px-4 md:px-[100px]">
+        {topSelling.map((product) => (
+          <ProductCard key={`top-${product.id}`} product={product} />
+        ))}
+      </div>
+      
+      <div className="flex justify-center mt-[36px]">
+        <button className="px-[54px] py-[16px] rounded-[62px] border border-black/10 text-black font-medium text-[16px] leading-[22px] hover:bg-gray-50 transition-colors">
+          View All
+        </button>
+      </div>
+
     </div>
   );
 }
