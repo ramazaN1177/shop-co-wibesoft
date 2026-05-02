@@ -17,4 +17,5 @@ html, body {
   color: #000000 !important;
   color-scheme: light !important;
   font-family: var(--font-satoshi) !important;
+  overflow-x: hidden;
 }
