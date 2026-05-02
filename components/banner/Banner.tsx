@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Banner() {
   return (
-    <div className="w-[100vw] relative left-1/2 -translate-x-1/2 -mt-8 bg-[#F2F0F1] pt-10 md:pt-24 overflow-hidden mb-8 md:mb-16 px-4 md:px-16">
+    <div className="w-[100vw] relative left-1/2 -translate-x-1/2 -mt-8 bg-[#F2F0F1] pt-10 md:pt-24 overflow-hidden px-4 md:px-16">
       <div className="max-w-[1240px] mx-auto w-full flex flex-col md:flex-row items-center relative">
         {/* Left Content */}
         <div className="w-full md:w-1/2 flex flex-col gap-6 md:gap-8 z-10 pt-4 md:pt-0">
