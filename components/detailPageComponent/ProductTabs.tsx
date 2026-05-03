@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import DetailComment from "../comments/DetailComment";
 
 const TABS = [
   { id: "details", label: "Product Details" },
@@ -38,11 +39,7 @@ export default function ProductTabs() {
 
       {/* Tab Content Placeholder */}
       <div className="mt-8">
-        {activeTab === "reviews" && (
-          <div className="flex flex-col gap-6">
-            {/* Yorumlar buraya gelecek */}
-          </div>
-        )}
+        {activeTab === "reviews" && <DetailComment />}
         {activeTab === "details" && (
           <div className="text-black/60">Product details content...</div>
         )}
