@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import ProductInfo from "./ProductInfo";
 import ColorSelector, { getColorsForType } from "./ColorSelector";
+import SizeSelector from "./SizeSelector";
 
 interface Product {
   _id: number;
@@ -83,6 +84,7 @@ export default function DetailPageComponent({ product }: DetailPageComponentProp
           description={product.description}
         />
         <ColorSelector colors={colors} />
+        <SizeSelector sizes={product.size} />
       </div>
     </div>
   );
