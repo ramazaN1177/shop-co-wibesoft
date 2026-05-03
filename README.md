@@ -26,38 +26,38 @@ SHOP.CO is a premium, responsive e-commerce application built with the latest we
 ### 🏠 Main Page
 The landing page features a hero banner, brand collaborations, and curated product sections.
 
-![Main Page 1](/screenshots/main-1.png)
-![Main Page 2](/screenshots/main-2.png)
-![Main Page 3](/screenshots/main-3.png)
+![Main Page 1](public/screenshots/main-1.png)
+![Main Page 2](public/screenshots/main-2.png)
+![Main Page 3](public/screenshots/main-3.png)
 
 ### 🏷️ Category Page (Filtering)
 Comprehensive filtering system allowing users to find products by style, price, and attributes.
 
-![Category Page](/screenshots/filter-1.png)
+![Category Page](public/screenshots/filter-1.png)
 
 ### 🔍 Product Detail
 In-depth product information with interactive variation selectors and real-time cart integration.
 
-![Detail 1](/screenshots/detail-1.png)
-![Detail 2](/screenshots/detail-2.png)
-![Detail 3](/screenshots/detail-3.png)
+![Detail 1](public/screenshots/detail-1.png)
+![Detail 2](public/screenshots/detail-2.png)
+![Detail 3](public/screenshots/detail-3.png)
 
 ### 🛒 Shopping Cart
 Manage selected items, adjust quantities, and view real-time order summaries.
 
-![Cart](/screenshots/cart-1.png)
+![Cart](public/screenshots/cart-1.png)
 
 ### 📱 Mobile Experience
 Optimized mobile interface with intuitive navigation and drawer-based filter systems.
 
 <div align="center">
-  <img src="/screenshots/mobile-main-1.png" width="30%" />
-  <img src="/screenshots/mobile-main-2.png" width="30%" />
-  <img src="/screenshots/mobile-filter.png" width="30%" />
+  <img src="public/screenshots/mobile-main-1.png" width="30%" />
+  <img src="public/screenshots/mobile-main-2.png" width="30%" />
+  <img src="public/screenshots/mobile-filter.png" width="30%" />
 </div>
 <div align="center" style="margin-top: 10px;">
-  <img src="/screenshots/mobile-detail.png" width="30%" />
-  <img src="/screenshots/mobile-cart-1.png" width="30%" />
+  <img src="public/screenshots/mobile-detail.png" width="30%" />
+  <img src="public/screenshots/mobile-cart-1.png" width="30%" />
 </div>
 
 ---
