@@ -3,10 +3,10 @@ import Link from "next/link";
 
 export default function DressStyleComponent() {
     const styles = [
-        { name: "Casual", href: "/casual", src: "/DresssStyle/casual.png", width: "md:w-[40%]" },
-        { name: "Formal", href: "/formal", src: "/DresssStyle/formal.png", width: "md:w-[60%]" },
-        { name: "Party", href: "/party", src: "/DresssStyle/party.png", width: "md:w-[60%]" },
-        { name: "Gym", href: "/gym", src: "/DresssStyle/gym.png", width: "md:w-[40%]" },
+        { name: "Casual", href: "/filterpage?style=Casual", src: "/DresssStyle/casual.png", width: "md:w-[40%]" },
+        { name: "Formal", href: "/filterpage?style=Formal", src: "/DresssStyle/formal.png", width: "md:w-[60%]" },
+        { name: "Party", href: "/filterpage?style=Party", src: "/DresssStyle/party.png", width: "md:w-[60%]" },
+        { name: "Gym", href: "/filterpage?style=Gym", src: "/DresssStyle/gym.png", width: "md:w-[40%]" },
     ];
 
     return (

@@ -1,0 +1,115 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import PathComponent from "@/components/PathComponent";
+import ProductCard from "@/components/productCard/ProductCard";
+
+interface ApiProduct {
+  _id: number;
+  title: string;
+  price: number;
+  oldPrice?: string;
+  image: string;
+  rating: number;
+  type: string;
+}
+
+import { Suspense } from "react";
+
+function FilterContent() {
+  const searchParams = useSearchParams();
+  const style = searchParams.get("style") || "Casual";
+  
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("https://fakestoreapiserver.reactbd.org/api/products");
+        const json = await response.json();
+        const productList = json.data || [];
+        
+        const filtered = productList.map((item: ApiProduct) => {
+          const originalPrice = item.oldPrice ? parseFloat(item.oldPrice) : undefined;
+          let discountPercentage;
+          if (originalPrice && originalPrice > item.price) {
+            discountPercentage = Math.round(((originalPrice - item.price) / originalPrice) * 100);
+          }
+
+          return {
+            id: item._id,
+            name: item.title,
+            price: item.price,
+            originalPrice: originalPrice,
+            discountPercentage: discountPercentage,
+            image: item.image,
+            rating: item.rating,
+          };
+        });
+
+        setProducts(filtered);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [style]);
+
+  const pathItems = [
+    { label: "Home", href: "/" },
+    { label: style },
+  ];
+
+  return (
+    <div className="flex flex-col w-full pb-20">
+      <PathComponent items={pathItems} />
+      
+      <div className="max-w-[1440px] mx-auto w-full px-4 md:px-16 mt-6 md:mt-10">
+        <div className="flex flex-col md:flex-row gap-8">
+          <div className="hidden md:block w-[295px] flex-shrink-0">
+            <div className="border border-black/10 rounded-[20px] p-6">
+              <h3 className="text-[20px] font-bold mb-4">Filters</h3>
+              <div className="flex flex-col gap-4 text-black/60">
+                <p>Category: {style}</p>
+                <p>Price Range: All</p>
+                <p>Size: All</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <div className="flex items-center justify-between mb-8">
+              <h1 className="text-[24px] md:text-[32px] font-bold text-black">{style}</h1>
+              <span className="text-black/60">Showing 1-10 of 100 Products</span>
+            </div>
+
+            {loading ? (
+              <div className="flex justify-center py-20">
+                <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-black"></div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                {products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function FilterPage() {
+  return (
+    <Suspense fallback={<div className="p-20 text-center">Loading page...</div>}>
+      <FilterContent />
+    </Suspense>
+  );
+}
