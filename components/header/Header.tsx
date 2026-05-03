@@ -12,31 +12,33 @@ export default function Header() {
     <div className="w-full relative z-50">
       {/* Top Black Banner */}
       {isBannerVisible && (
-        <div className="bg-black w-full py-2 flex items-center justify-center relative px-4">
-          <p className="text-white text-xs sm:text-sm font-satoshi text-center">
-            Sign up and get 20% off to your first order.{" "}
-            <Link href="#" className="font-medium underline underline-offset-4 hover:text-gray-300 transition-colors">
-              Sign Up Now
-            </Link>
-          </p>
-          <button
-            onClick={() => setIsBannerVisible(false)}
-            className="absolute right-4 md:right-16 text-white hover:text-gray-300 transition-colors hidden sm:block"
-          >
-            <Image
-              src="/TopBar/cross.png"
-              alt="Close"
-              width={14}
-              height={14}
-              className="w-3.5 h-3.5"
-            />
-          </button>
+        <div className="bg-black w-full py-2">
+          <div className="max-w-[1440px] mx-auto w-full px-4 md:px-16 flex items-center justify-center relative">
+            <p className="text-white text-xs sm:text-sm font-satoshi text-center">
+              Sign up and get 20% off to your first order.{" "}
+              <Link href="#" className="font-medium underline underline-offset-4 hover:text-gray-300 transition-colors">
+                Sign Up Now
+              </Link>
+            </p>
+            <button
+              onClick={() => setIsBannerVisible(false)}
+              className="absolute right-4 md:right-16 text-white hover:text-gray-300 transition-colors hidden sm:block"
+            >
+              <Image
+                src="/TopBar/cross.png"
+                alt="Close"
+                width={14}
+                height={14}
+                className="w-3.5 h-3.5"
+              />
+            </button>
+          </div>
         </div>
       )}
 
       {/* Main Header */}
-      <header className="w-full bg-white border-b border-black/10 py-5 px-4 md:px-16">
-        <div className="max-w-[1240px] mx-auto w-full flex items-center justify-between gap-4 lg:gap-10">
+      <header className="w-full bg-white border-b border-black/10 py-5">
+        <div className="max-w-[1440px] mx-auto w-full px-4 md:px-16 flex items-center justify-between gap-4 lg:gap-10">
 
           {/* Left Side: Mobile Menu + Logo */}
           <div className="flex items-center gap-4">

@@ -36,7 +36,7 @@ export default function CommentSide({ comments }: CommentSideProps) {
 
     // Calculate the left padding so the first card aligns with content area
     const calcPadding = useCallback(() => {
-        const contentMaxWidth = 1240;
+        const contentMaxWidth = 1312;
         const vw = window.innerWidth;
         // Content area is centered, so padding from viewport edge = (vw - contentWidth) / 2
         const contentWidth = Math.min(contentMaxWidth, vw - (vw >= 768 ? 128 : 32));
@@ -95,7 +95,7 @@ export default function CommentSide({ comments }: CommentSideProps) {
     return (
         <div className="comment-carousel-wrapper">
             {/* Header - aligned with content */}
-            <div className="comment-carousel-header">
+            <div className="max-w-[1440px] mx-auto w-full px-4 md:px-16 flex items-center justify-between mb-8 md:mb-10">
                 <h2 className="text-[32px] md:text-[48px] font-bold font-integral text-black uppercase leading-[1.1]">
                     OUR HAPPY CUSTOMERS
                 </h2>

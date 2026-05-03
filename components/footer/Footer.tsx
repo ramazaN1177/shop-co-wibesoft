@@ -5,10 +5,10 @@ import FooterBottom from "./FooterBottom";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#F0F0F0] pt-36 pb-12 px-4 md:px-16 mt-40 relative font-satoshi w-full">
+    <footer className="bg-[#F0F0F0] pt-36 pb-12 mt-40 relative font-satoshi w-full">
       <Newsletter />
 
-      <div className="max-w-[1240px] mx-auto mt-20 lg:mt-16">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-16 mt-20 lg:mt-16">
         {/* Top Section */}
         <div className="flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-8 pb-12 border-b border-black/10">
           {/* Brand & Social */}

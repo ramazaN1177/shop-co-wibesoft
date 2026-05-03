@@ -52,7 +52,7 @@ html, body {
 }
 
 .comment-carousel-header {
-  max-width: calc(1240px + 128px); /* 1240px + 2*64px padding */
+  max-width: calc(1440px + 128px); /* 1440px + 2*64px padding */
   width: 100%;
   margin: 0 auto;
   padding: 0 16px;
@@ -95,7 +95,7 @@ html, body {
 .comment-blur-left {
   left: 0;
   /* Width = distance from viewport edge to content edge */
-  width: max(16px, calc((100vw - 1240px) / 2));
+  width: max(16px, calc((100vw - 1440px) / 2));
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 1) 0%,
@@ -107,7 +107,7 @@ html, body {
 
 .comment-blur-right {
   right: 0;
-  width: max(16px, calc((100vw - 1240px) / 2));
+  width: max(16px, calc((100vw - 1440px) / 2));
   background: linear-gradient(
     to left,
     rgba(255, 255, 255, 1) 0%,
@@ -132,8 +132,8 @@ html, body {
 
 .comment-card-slide {
   flex-shrink: 0;
-  /* (1240px - 2 * 20px gap) / 3 = 400px */
-  width: 400px;
+  /* (1312px - 2 * 20px gap) / 3 = 424px */
+  width: 424px;
 }
 
 @media (max-width: 767px) {

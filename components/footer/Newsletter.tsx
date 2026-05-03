@@ -1,6 +1,6 @@
 export default function Newsletter() {
   return (
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[1240px] bg-black rounded-[20px] py-9 px-6 md:px-16 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-lg">
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[1440px] bg-black rounded-[20px] py-9 px-6 md:px-16 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-lg">
       <h2 className="text-white font-integral text-[32px] md:text-[40px] leading-[1.2] max-w-[551px] font-bold uppercase">
         STAY UPTO DATE ABOUT OUR LATEST OFFERS
       </h2>
