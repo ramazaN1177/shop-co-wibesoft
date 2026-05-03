@@ -5,6 +5,7 @@ import Image from "next/image";
 import ProductInfo from "./ProductInfo";
 import ColorSelector, { getColorsForType } from "./ColorSelector";
 import SizeSelector from "./SizeSelector";
+import AddToCart from "./AddToCart";
 
 interface Product {
   _id: number;
@@ -85,6 +86,7 @@ export default function DetailPageComponent({ product }: DetailPageComponentProp
         />
         <ColorSelector colors={colors} />
         <SizeSelector sizes={product.size} />
+        <AddToCart />
       </div>
     </div>
   );
