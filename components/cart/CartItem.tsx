@@ -2,19 +2,15 @@
 
 import Image from "next/image";
 
+import { useCartStore, CartItem as CartItemType } from "@/store/useCartStore";
+
 interface CartItemProps {
-  item: {
-    id: number;
-    title: string;
-    size: string;
-    color: string;
-    price: number;
-    image: string;
-    quantity: number;
-  };
+  item: CartItemType;
 }
 
 export default function CartItem({ item }: CartItemProps) {
+  const { updateQuantity, removeFromCart } = useCartStore();
+
   return (
     <div className="flex gap-4 py-6 first:pt-0 last:pb-0">
       {/* Product Image */}
@@ -44,7 +40,10 @@ export default function CartItem({ item }: CartItemProps) {
             </p>
           </div>
           {/* Delete Icon */}
-          <button className="text-[#FF3333] hover:opacity-80 transition-opacity">
+          <button 
+            onClick={() => removeFromCart(item.id, item.size, item.color)}
+            className="text-[#FF3333] hover:opacity-80 transition-opacity"
+          >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18.8892 7.2L18.0142 19.45C17.9576 20.2431 17.5885 20.9754 16.9806 21.5003C16.3727 22.0252 15.5674 22.3075 14.7258 22.2917H9.27419C8.4326 22.3075 7.62734 22.0252 7.01944 21.5003C6.41154 20.9754 6.04237 20.2431 5.98583 19.45L5.11083 7.2M10.1108 11.2V17.2M13.8892 11.2V17.2M14.5 3.2L13.8442 1.88833C13.659 1.518 13.3664 1.2111 13.0044 1.00767C12.6425 0.804245 12.2285 0.71401 11.8158 0.748333H12.1842C11.7715 0.71401 11.3575 0.804245 10.9956 1.00767C10.6336 1.2111 10.341 1.518 10.1558 1.88833L9.5 3.2M3.5 5.2H20.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -57,13 +56,20 @@ export default function CartItem({ item }: CartItemProps) {
           </span>
           {/* Quantity Selector */}
           <div className="flex items-center gap-4 bg-[#F0F0F0] px-4 py-2 rounded-full h-[36px] md:h-[44px]">
-            <button className="text-[20px] md:text-[24px] text-black hover:text-black/60 transition-colors">
+            <button 
+              onClick={() => updateQuantity(item.id, item.size, item.color, item.quantity - 1)}
+              className="text-[20px] md:text-[24px] text-black hover:text-black/60 transition-colors disabled:opacity-30"
+              disabled={item.quantity <= 1}
+            >
               -
             </button>
             <span className="text-[14px] md:text-[16px] font-medium min-w-[12px] text-center">
               {item.quantity}
             </span>
-            <button className="text-[20px] md:text-[24px] text-black hover:text-black/60 transition-colors">
+            <button 
+              onClick={() => updateQuantity(item.id, item.size, item.color, item.quantity + 1)}
+              className="text-[20px] md:text-[24px] text-black hover:text-black/60 transition-colors"
+            >
               +
             </button>
           </div>
