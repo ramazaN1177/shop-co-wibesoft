@@ -17,6 +17,7 @@ interface ApiProduct {
 
 import { Suspense } from "react";
 import Pagination from "@/components/Pagination";
+import Filter from "@/components/Filter";
 
 function FilterContent() {
   const searchParams = useSearchParams();
@@ -81,14 +82,7 @@ function FilterContent() {
       <div className="max-w-[1440px] mx-auto w-full px-4 md:px-16 mt-6 md:mt-10">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="hidden md:block w-[295px] flex-shrink-0">
-            <div className="border border-black/10 rounded-[20px] p-6">
-              <h3 className="text-[20px] font-bold mb-4">Filters</h3>
-              <div className="flex flex-col gap-4 text-black/60">
-                <p>Category: {style}</p>
-                <p>Price Range: All</p>
-                <p>Size: All</p>
-              </div>
-            </div>
+            <Filter />
           </div>
 
           <div className="flex-1">
