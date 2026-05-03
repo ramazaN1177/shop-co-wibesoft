@@ -16,6 +16,7 @@ interface ApiProduct {
 }
 
 import { Suspense } from "react";
+import Pagination from "@/components/Pagination";
 
 function FilterContent() {
   const searchParams = useSearchParams();
@@ -23,6 +24,8 @@ function FilterContent() {
   
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,7 +34,7 @@ function FilterContent() {
         const json = await response.json();
         const productList = json.data || [];
         
-        const filtered = productList.map((item: ApiProduct) => {
+        const mappedProducts = productList.map((item: ApiProduct) => {
           const originalPrice = item.oldPrice ? parseFloat(item.oldPrice) : undefined;
           let discountPercentage;
           if (originalPrice && originalPrice > item.price) {
@@ -49,7 +52,7 @@ function FilterContent() {
           };
         });
 
-        setProducts(filtered);
+        setProducts(mappedProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -58,12 +61,18 @@ function FilterContent() {
     };
 
     fetchProducts();
+    setCurrentPage(1); // Stil değiştiğinde ilk sayfaya dön
   }, [style]);
 
   const pathItems = [
     { label: "Home", href: "/" },
     { label: style },
   ];
+
+  // Pagination mantığı
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentProducts = products.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div className="flex flex-col w-full pb-20">
@@ -87,7 +96,7 @@ function FilterContent() {
               <h1 className="text-[24px] md:text-[32px] font-bold text-black">{style}</h1>
               <div className="flex items-center gap-4">
                 <span className="text-black/60 text-[14px] md:text-[16px]">
-                  Showing 1-{products.length} of {products.length} Products
+                  Showing {startIndex + 1}-{Math.min(startIndex + itemsPerPage, products.length)} of {products.length} Products
                 </span>
                 <div className="hidden md:flex items-center gap-2 cursor-pointer group">
                   <span className="text-black/60">Sort by:</span>
@@ -106,11 +115,24 @@ function FilterContent() {
                 <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-black"></div>
               </div>
             ) : (
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-                {products.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
+              <>
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                  {currentProducts.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+                
+                {totalPages > 1 && (
+                  <Pagination 
+                    currentPage={currentPage} 
+                    totalPages={totalPages} 
+                    onPageChange={(page) => {
+                      setCurrentPage(page);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }} 
+                  />
+                )}
+              </>
             )}
           </div>
         </div>
