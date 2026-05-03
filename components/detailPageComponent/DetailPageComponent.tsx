@@ -31,8 +31,8 @@ export default function DetailPageComponent({ product }: DetailPageComponentProp
   return (
     <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 w-full">
       {/* Sol Taraf - Ürün Görselleri */}
-      <div className="flex flex-col-reverse lg:flex-row gap-3 lg:gap-[14px] w-full lg:w-[58%]">
-        {/* Thumbnail Görseller */}
+      <div className="flex flex-col-reverse lg:flex-row gap-3 lg:gap-[14px]">
+        {/* Thumbnail Görseller - 152x168 */}
         <div className="flex lg:flex-col gap-3 lg:gap-[14px] overflow-x-auto lg:overflow-x-visible no-scrollbar">
           {images.map((img, index) => (
             <button
@@ -55,14 +55,14 @@ export default function DetailPageComponent({ product }: DetailPageComponentProp
           ))}
         </div>
 
-        {/* Ana Büyük Görsel */}
-        <div className="relative w-full aspect-[444/530] lg:flex-1 rounded-[20px] overflow-hidden bg-[#F0EEED]">
+        {/* Ana Büyük Görsel - 444x530 */}
+        <div className="relative w-full lg:w-[444px] aspect-[444/530] rounded-[20px] overflow-hidden bg-[#F0EEED]">
           <Image
             src={images[selectedImage]}
             alt={product.title}
             fill
             className="object-cover transition-all duration-500 ease-in-out"
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="(max-width: 1024px) 100vw, 444px"
             priority
           />
         </div>
