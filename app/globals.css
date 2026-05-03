@@ -15,6 +15,16 @@
   animation: marquee 30s linear infinite;
 }
 
+@keyframes loader-progress {
+  0% { transform: scaleX(0); }
+  50% { transform: scaleX(0.7); }
+  100% { transform: scaleX(1); }
+}
+
+.animate-loader-progress {
+  animation: loader-progress 2s ease-in-out infinite;
+}
+
 @font-face {
   font-family: 'Integral CF';
   src: local('Arial Black');
@@ -52,7 +62,7 @@ html, body {
 }
 
 .comment-carousel-header {
-  max-width: calc(1440px + 128px); /* 1440px + 2*64px padding */
+  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   padding: 0 16px;
