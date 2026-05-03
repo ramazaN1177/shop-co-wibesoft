@@ -83,9 +83,22 @@ function FilterContent() {
           </div>
 
           <div className="flex-1">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
               <h1 className="text-[24px] md:text-[32px] font-bold text-black">{style}</h1>
-              <span className="text-black/60">Showing 1-10 of 100 Products</span>
+              <div className="flex items-center gap-4">
+                <span className="text-black/60 text-[14px] md:text-[16px]">
+                  Showing 1-{products.length} of {products.length} Products
+                </span>
+                <div className="hidden md:flex items-center gap-2 cursor-pointer group">
+                  <span className="text-black/60">Sort by:</span>
+                  <span className="font-medium text-black flex items-center gap-1 group-hover:text-black/70 transition-colors">
+                    Most Popular
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
             </div>
 
             {loading ? (
