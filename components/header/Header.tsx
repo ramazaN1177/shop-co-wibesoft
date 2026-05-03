@@ -37,7 +37,7 @@ export default function Header() {
       {/* Main Header */}
       <header className="w-full bg-white border-b border-black/10 py-5 px-4 md:px-16">
         <div className="max-w-[1240px] mx-auto w-full flex items-center justify-between gap-4 lg:gap-10">
-          
+
           {/* Left Side: Mobile Menu + Logo */}
           <div className="flex items-center gap-4">
             {/* Hamburger Menu (Mobile Only) */}
@@ -53,11 +53,11 @@ export default function Header() {
             </button>
 
             <Link href="/">
-              <Image 
-                src="/Footer/SHOP.CO.png" 
-                alt="SHOP.CO Logo" 
-                width={160} 
-                height={22} 
+              <Image
+                src="/Footer/SHOP.CO.png"
+                alt="SHOP.CO Logo"
+                width={160}
+                height={22}
                 className="w-auto h-[22px] lg:h-[25px]"
                 priority
               />
@@ -77,11 +77,11 @@ export default function Header() {
 
           {/* Search Bar (Desktop) */}
           <div className="hidden lg:flex flex-1 max-w-[577px] h-[48px] bg-[#F0F0F0] rounded-full px-4 items-center gap-3">
-            <Image 
-              src="/TopBar/searchLogo.png" 
-              alt="Search" 
-              width={24} 
-              height={24} 
+            <Image
+              src="/TopBar/searchLogo.png"
+              alt="Search"
+              width={24}
+              height={24}
               className="w-6 h-6 opacity-40"
             />
             <input
@@ -95,11 +95,11 @@ export default function Header() {
           <div className="flex items-center gap-3 sm:gap-4">
             {/* Search Icon (Mobile Only) */}
             <button className="lg:hidden block">
-              <Image 
-                src="/TopBar/searchLogo.png" 
-                alt="Search" 
-                width={24} 
-                height={24} 
+              <Image
+                src="/TopBar/searchLogo.png"
+                alt="Search"
+                width={24}
+                height={24}
                 className="w-6 h-6"
               />
             </button>

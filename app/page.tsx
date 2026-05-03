@@ -9,11 +9,12 @@ export default function ProductListScreen() {
     <main className="flex flex-col w-full overflow-x-hidden">
       <Banner />
       <Slider />
-      <div className="max-w-[1240px] mx-auto w-full px-4 md:px-16 flex flex-col gap-8">
+      <div className="max-w-[1440px] mx-auto w-full px-4 md:px-16 flex flex-col gap-8">
         <MainComponent />
         <DressStyleComponent />
         <CommentSection />
       </div>
+
     </main>
   );
 }
