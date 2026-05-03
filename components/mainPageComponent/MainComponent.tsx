@@ -15,11 +15,11 @@ async function getProducts(): Promise<ApiProduct[]> {
     const res = await fetch(process.env.NEXT_PRODUCTS_API_URL as string, {
       next: { revalidate: 3600 } // 1 saat boyunca önbellekte tutar (hızlı yükleme için)
     });
-    
+
     if (!res.ok) {
       throw new Error("Ürünler getirilemedi");
     }
-    
+
     const json = await res.json();
     return json.data || [];
   } catch (error) {
@@ -36,7 +36,7 @@ export default async function MainComponent() {
   const formattedProducts = apiProducts.map((p) => {
     const oldPriceNum = p.oldPrice ? parseFloat(p.oldPrice) : undefined;
     let discountPercentage;
-    
+
     // Eğer eski fiyat varsa ve mevcut fiyattan büyükse indirim oranını hesapla
     if (oldPriceNum && oldPriceNum > p.price) {
       discountPercentage = Math.round(((oldPriceNum - p.price) / oldPriceNum) * 100);
@@ -60,26 +60,25 @@ export default async function MainComponent() {
 
   return (
     <div className="w-full flex flex-col gap-[55px] pb-[64px]">
-      
       {/* --- NEW ARRIVALS BÖLÜMÜ --- */}
       <h2 className="text-[32px] md:text-[48px] font-bold font-integral text-black leading-none mt-4 md:mt-8 text-center uppercase">
         NEW ARRIVALS
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[20px] px-4 md:px-[100px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px]">
         {newArrivals.map((product) => (
           <ProductCard key={`new-${product.id}`} product={product} />
         ))}
       </div>
-      
-      <div className="flex justify-center mt-[36px]">
+
+      <div className="flex justify-center -mt-[19px]">
         <button className="px-[54px] py-[16px] rounded-[62px] border border-black/10 text-black font-medium text-[16px] leading-[22px] hover:bg-gray-50 transition-colors">
           View All
         </button>
       </div>
 
       {/* --- AYIRICI ÇİZGİ --- */}
-      <div className="w-full px-4 md:px-[100px] mt-[10px] mb-[10px]">
+      <div className="w-full">
         <hr className="border-t border-black/10" />
       </div>
 
@@ -88,18 +87,17 @@ export default async function MainComponent() {
         TOP SELLING
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[20px] px-4 md:px-[100px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px]">
         {topSelling.map((product) => (
           <ProductCard key={`top-${product.id}`} product={product} />
         ))}
       </div>
-      
-      <div className="flex justify-center mt-[36px]">
+
+      <div className="flex justify-center -mt-[19px]">
         <button className="px-[54px] py-[16px] rounded-[62px] border border-black/10 text-black font-medium text-[16px] leading-[22px] hover:bg-gray-50 transition-colors">
           View All
         </button>
       </div>
-
     </div>
   );
 }
