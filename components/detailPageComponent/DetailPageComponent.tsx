@@ -7,6 +7,7 @@ import ColorSelector, { getColorsForType } from "./ColorSelector";
 import SizeSelector from "./SizeSelector";
 import AddToCart from "./AddToCart";
 import ProductTabs from "./ProductTabs";
+import RelatedProducts from "./RelatedProducts";
 
 interface Product {
   _id: number;
@@ -95,6 +96,9 @@ export default function DetailPageComponent({ product }: DetailPageComponentProp
 
       {/* Ürün Sekmeleri (Details, Reviews, FAQs) */}
       <ProductTabs />
+
+      {/* Benzer Ürünler (You Might Also Like) */}
+      <RelatedProducts />
     </div>
   );
 }
