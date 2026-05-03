@@ -58,26 +58,28 @@ export default async function MainComponent() {
   const topSelling = formattedProducts.slice(4, 8);
 
   return (
-    <div className="w-full flex flex-col gap-[55px] pb-[64px]">
+    <div className="w-full flex flex-col gap-10 md:gap-[55px] pb-[64px]">
       {/* --- NEW ARRIVALS BÖLÜMÜ --- */}
       <h2 className="text-[32px] md:text-[48px] font-bold font-integral text-black leading-none mt-4 md:mt-8 text-center uppercase">
         NEW ARRIVALS
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px]">
+      <div className="flex md:grid md:grid-cols-4 gap-[16px] md:gap-[20px] overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 scroll-smooth no-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
         {newArrivals.map((product) => (
-          <ProductCard key={`new-${product.id}`} product={product} />
+          <div key={`new-${product.id}`} className="min-w-[198px] sm:min-w-[250px] md:min-w-0">
+            <ProductCard product={product} />
+          </div>
         ))}
       </div>
 
-      <div className="flex justify-center -mt-[19px]">
-        <button className="px-[54px] py-[16px] rounded-[62px] border border-black/10 text-black font-medium text-[16px] leading-[22px] hover:bg-gray-50 transition-colors">
+      <div className="flex justify-center">
+        <button className="px-[54px] py-[16px] rounded-[62px] border border-black/10 text-black font-medium text-[16px] leading-[22px] hover:bg-gray-50 transition-colors w-full md:w-auto">
           View All
         </button>
       </div>
 
       {/* --- AYIRICI ÇİZGİ --- */}
-      <div className="w-full">
+      <div className="w-full px-4 md:px-0">
         <hr className="border-t border-black/10" />
       </div>
 
@@ -86,17 +88,20 @@ export default async function MainComponent() {
         TOP SELLING
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px]">
+      <div className="flex md:grid md:grid-cols-4 gap-[16px] md:gap-[20px] overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 scroll-smooth no-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
         {topSelling.map((product) => (
-          <ProductCard key={`top-${product.id}`} product={product} />
+          <div key={`top-${product.id}`} className="min-w-[198px] sm:min-w-[250px] md:min-w-0">
+            <ProductCard product={product} />
+          </div>
         ))}
       </div>
 
-      <div className="flex justify-center -mt-[19px]">
-        <button className="px-[54px] py-[16px] rounded-[62px] border border-black/10 text-black font-medium text-[16px] leading-[22px] hover:bg-gray-50 transition-colors">
+      <div className="flex justify-center">
+        <button className="px-[54px] py-[16px] rounded-[62px] border border-black/10 text-black font-medium text-[16px] leading-[22px] hover:bg-gray-50 transition-colors w-full md:w-auto">
           View All
         </button>
       </div>
     </div>
+
   );
 }

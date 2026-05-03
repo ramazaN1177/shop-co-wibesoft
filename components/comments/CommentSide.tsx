@@ -20,7 +20,19 @@ export default function CommentSide({ comments }: CommentSideProps) {
     const scrollRef = useRef<HTMLDivElement>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [paddingLeft, setPaddingLeft] = useState(0);
-    const maxIndex = Math.max(0, comments.length - 3);
+    const [cardsToShow, setCardsToShow] = useState(3);
+    const [maxIndex, setMaxIndex] = useState(0);
+
+    useEffect(() => {
+        const updateCardsToShow = () => {
+            const val = window.innerWidth < 768 ? 1 : 3;
+            setCardsToShow(val);
+            setMaxIndex(Math.max(0, comments.length - val));
+        };
+        updateCardsToShow();
+        window.addEventListener("resize", updateCardsToShow);
+        return () => window.removeEventListener("resize", updateCardsToShow);
+    }, [comments.length]);
 
     // Calculate the left padding so the first card aligns with content area
     const calcPadding = useCallback(() => {
@@ -35,18 +47,17 @@ export default function CommentSide({ comments }: CommentSideProps) {
 
     const scrollToIndex = useCallback((index: number) => {
         if (!scrollRef.current) return;
-        const cardWidth = 400;
-        const gap = 20;
-        const pad = calcPadding();
+        const firstCard = scrollRef.current.querySelector(".comment-card-slide");
+        if (!firstCard) return;
         
-        // Each card position = paddingLeft + index * (cardWidth + gap)
-        // We want that card to appear at the content start (which is paddingLeft from left)
-        // So scrollLeft = index * (cardWidth + gap)
+        const cardWidth = firstCard.clientWidth;
+        const gap = 20;
+        
         scrollRef.current.scrollTo({
             left: index * (cardWidth + gap),
             behavior: "smooth",
         });
-    }, [calcPadding]);
+    }, []);
 
     const handlePrev = () => {
         const newIndex = Math.max(0, currentIndex - 1);

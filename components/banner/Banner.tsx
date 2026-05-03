@@ -2,12 +2,12 @@ import Image from "next/image";
 
 export default function Banner() {
   return (
-    <div className="w-[100vw] relative left-1/2 -translate-x-1/2 -mt-8 bg-[#F2F0F1] pt-10 md:pt-24 overflow-hidden px-4 md:px-16">
-      <div className="max-w-[1240px] mx-auto w-full flex flex-col md:flex-row items-center relative">
+    <div className="w-full bg-[#F2F0F1] pt-10 md:pt-24 overflow-hidden">
+      <div className="max-w-[1440px] mx-auto w-full flex flex-col md:flex-row items-center relative">
         {/* Left Content */}
-        <div className="w-full md:w-1/2 flex flex-col gap-6 md:gap-8 z-10 pt-4 md:pt-0">
+        <div className="w-full md:w-1/2 flex flex-col gap-5 md:gap-8 z-10 pt-4 md:pt-0 px-4 md:pl-16 md:pr-0">
           <div className="relative">
-            <h1 className="text-[36px] md:text-[64px] font-bold font-integral leading-[1] text-black uppercase max-w-[577px]">
+            <h1 className="text-[32px] sm:text-[40px] md:text-[64px] font-bold font-integral leading-[1.1] md:leading-[1] text-black uppercase max-w-[577px]">
               Find Clothes That Matches Your Style
             </h1>
             {/* Right Vector (Desktop) */}
@@ -34,12 +34,12 @@ export default function Banner() {
             />
           </div>
           
-          <button className="bg-black text-white rounded-full py-4 px-12 w-full md:w-max font-satoshi font-medium mt-2 hover:bg-black/80 transition-colors">
+          <button className="bg-black text-white rounded-full py-4 px-12 w-full md:w-max font-satoshi font-medium mt-2 hover:bg-black/80 transition-all duration-300 active:scale-95">
             Shop Now
           </button>
 
           {/* Stats Section */}
-          <div className="flex items-center justify-center md:justify-start flex-wrap gap-4 md:gap-8 mt-4 md:mt-8 pb-10 md:pb-0">
+          <div className="grid grid-cols-2 md:flex md:items-center justify-items-center md:justify-start gap-y-6 gap-x-4 md:gap-8 mt-6 md:mt-8 pb-10 md:pb-0">
             <div className="flex flex-col">
               <span className="text-2xl md:text-[40px] font-bold text-black">200+</span>
               <span className="text-xs md:text-sm text-black/60 font-satoshi">International Brands</span>
@@ -50,7 +50,7 @@ export default function Banner() {
               <span className="text-xs md:text-sm text-black/60 font-satoshi">High-Quality Products</span>
             </div>
             <div className="w-[1px] h-10 md:h-12 bg-black/10 hidden md:block"></div>
-            <div className="flex flex-col w-full md:w-auto text-center md:text-left mt-4 md:mt-0">
+            <div className="flex flex-col col-span-2 md:col-span-1 text-center md:text-left">
               <span className="text-2xl md:text-[40px] font-bold text-black">30,000+</span>
               <span className="text-xs md:text-sm text-black/60 font-satoshi">Happy Customers</span>
             </div>
@@ -58,33 +58,43 @@ export default function Banner() {
         </div>
 
         {/* Right Image Container */}
-        <div className="w-full md:w-1/2 relative h-[400px] md:h-[663px] mt-4 md:mt-0">
+        <div className="w-full md:w-1/2 relative h-[448px] sm:h-[500px] md:h-[663px] mt-4 md:mt-0 md:pr-16">
+          {/* Desktop Image */}
           <Image 
             src="/Banner/Banner.png" 
             alt="Banner Models" 
             fill
-            className="object-cover object-top md:object-right-top"
+            className="hidden md:block object-cover object-right-top"
             priority
           />
-          
+          {/* Mobile Image */}
+          <Image 
+            src="/Banner/Banner-2.png" 
+            alt="Banner Models" 
+            fill
+            className="md:hidden object-cover object-bottom"
+            priority
+          />
           
           {/* Mobile Star Vectors */}
           <Image 
             src="/Banner/Vector.png" 
             alt="Star" 
-            width={40} 
-            height={40} 
-            className="md:hidden absolute top-10 right-4 w-10 animate-pulse"
+            width={44} 
+            height={44} 
+            className="md:hidden absolute top-4 right-4 w-11 animate-pulse"
           />
           <Image 
             src="/Banner/Vector.png" 
             alt="Star" 
             width={32} 
             height={32} 
-            className="md:hidden absolute top-1/2 left-4 w-8 opacity-70 animate-pulse"
+            className="md:hidden absolute top-[40%] left-6 w-8 opacity-70 animate-pulse"
           />
         </div>
       </div>
     </div>
   );
 }
+
+

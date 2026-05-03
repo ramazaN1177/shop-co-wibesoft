@@ -17,13 +17,12 @@ export default function RootLayout({
     <html lang="en" className="overflow-x-hidden">
       <body className="bg-white text-black antialiased flex flex-col min-h-screen overflow-x-hidden w-full">
         <Header />
-        <main className="flex-1 w-full px-4 md:px-16 pt-8">
-          <div className="max-w-[1240px] mx-auto w-full">
-            {children}
-          </div>
+        <main className="flex-1 w-full">
+          {children}
         </main>
         <Footer />
       </body>
+
     </html>
   );
 }
