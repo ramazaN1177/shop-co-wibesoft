@@ -1,14 +1,12 @@
 "use client";
 
-import { useState } from "react";
-
 interface SizeSelectorProps {
   sizes: string[];
+  selectedSize: string;
+  onSelect: (size: string) => void;
 }
 
-export default function SizeSelector({ sizes }: SizeSelectorProps) {
-  const [selectedSize, setSelectedSize] = useState("Large");
-
+export default function SizeSelector({ sizes, selectedSize, onSelect }: SizeSelectorProps) {
   // Kullanıcının istediği standart bedenler
   const displaySizes = ["Small", "Medium", "Large", "X-Large"];
 
@@ -22,7 +20,7 @@ export default function SizeSelector({ sizes }: SizeSelectorProps) {
         {displaySizes.map((size) => (
           <button
             key={size}
-            onClick={() => setSelectedSize(size)}
+            onClick={() => onSelect(size)}
             className={`px-6 py-3 rounded-full text-[14px] md:text-[16px] transition-all duration-200 border ${
               selectedSize === size
                 ? "bg-black text-white border-black"

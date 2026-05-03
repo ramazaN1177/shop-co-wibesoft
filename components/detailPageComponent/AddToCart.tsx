@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+interface AddToCartProps {
+  quantity: number;
+  onIncrement: () => void;
+  onDecrement: () => void;
+  onAdd: () => void;
+}
 
-export default function AddToCart() {
-  const [quantity, setQuantity] = useState(1);
-
-  const increment = () => setQuantity((prev) => prev + 1);
-  const decrement = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
-
+export default function AddToCart({ quantity, onIncrement, onDecrement, onAdd }: AddToCartProps) {
   return (
     <div className="flex flex-col gap-4 font-satoshi mt-2">
       <div className="w-full h-[1px] bg-black/10" />
@@ -16,9 +16,10 @@ export default function AddToCart() {
         {/* Quantity Selector */}
         <div className="flex items-center justify-between w-[110px] md:w-[170px] h-[44px] md:h-[52px] bg-[#F0F0F0] rounded-full px-4 md:px-6">
           <button
-            onClick={decrement}
+            onClick={onDecrement}
             className="text-[20px] md:text-[24px] text-black hover:opacity-70 transition-opacity leading-none"
             aria-label="Decrease quantity"
+            disabled={quantity <= 1}
           >
             &minus;
           </button>
@@ -26,7 +27,7 @@ export default function AddToCart() {
             {quantity}
           </span>
           <button
-            onClick={increment}
+            onClick={onIncrement}
             className="text-[20px] md:text-[24px] text-black hover:opacity-70 transition-opacity leading-none"
             aria-label="Increase quantity"
           >
@@ -35,7 +36,10 @@ export default function AddToCart() {
         </div>
 
         {/* Add to Cart Button */}
-        <button className="flex-1 h-[44px] md:h-[52px] bg-black text-white rounded-full text-[14px] md:text-[16px] font-medium hover:bg-black/90 transition-colors">
+        <button 
+          onClick={onAdd}
+          className="flex-1 h-[44px] md:h-[52px] bg-black text-white rounded-full text-[14px] md:text-[16px] font-medium hover:bg-black/90 transition-colors active:scale-95"
+        >
           Add to Cart
         </button>
       </div>

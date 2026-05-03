@@ -2,11 +2,23 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCartStore } from "@/store/useCartStore";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBannerVisible, setIsBannerVisible] = useState(true);
+  
+  const { cartItems } = useCartStore();
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  const cartCount = isHydrated 
+    ? cartItems.reduce((total, item) => total + item.quantity, 0) 
+    : 0;
 
   return (
     <div className="w-full relative z-50">
@@ -106,9 +118,14 @@ export default function Header() {
               />
             </button>
 
-            <Link href="/cart">
+            <Link href="/cart" className="relative group">
               {/* Cart Icon */}
               <Image src="/TopBar/cartLogo.png" alt="Cart" width={24} height={24} className="w-6 h-6" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 bg-[#FF3333] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-fadeIn">
+                  {cartCount}
+                </span>
+              )}
             </Link>
 
             <Link href="/profile">

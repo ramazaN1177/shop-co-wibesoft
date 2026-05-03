@@ -8,6 +8,7 @@ import SizeSelector from "./SizeSelector";
 import AddToCart from "./AddToCart";
 import ProductTabs from "./ProductTabs";
 import RelatedProducts from "./RelatedProducts";
+import { useCartStore } from "@/store/useCartStore";
 
 interface Product {
   _id: number;
@@ -34,7 +35,24 @@ export default function DetailPageComponent({ product }: DetailPageComponentProp
   const images = [product.image, product.image, product.image];
   const [selectedImage, setSelectedImage] = useState(0);
 
+  // Cart States
   const colors = getColorsForType(product.type);
+  const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const [selectedSize, setSelectedSize] = useState("Large");
+  const [quantity, setQuantity] = useState(1);
+
+  const { addToCart } = useCartStore();
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product._id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      size: selectedSize,
+      color: selectedColor,
+    }, quantity);
+  };
 
   return (
     <div className="flex flex-col w-full">
@@ -88,9 +106,22 @@ export default function DetailPageComponent({ product }: DetailPageComponentProp
             discountedPrice={product.discountedPrice}
             description={product.description}
           />
-          <ColorSelector colors={colors} />
-          <SizeSelector sizes={product.size} />
-          <AddToCart />
+          <ColorSelector 
+            colors={colors} 
+            selectedColor={selectedColor} 
+            onSelect={setSelectedColor} 
+          />
+          <SizeSelector 
+            sizes={product.size} 
+            selectedSize={selectedSize} 
+            onSelect={setSelectedSize} 
+          />
+          <AddToCart 
+            quantity={quantity}
+            onIncrement={() => setQuantity(q => q + 1)}
+            onDecrement={() => setQuantity(q => (q > 1 ? q - 1 : 1))}
+            onAdd={handleAddToCart}
+          />
         </div>
       </div>
 

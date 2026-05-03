@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-
 interface ColorSelectorProps {
   colors: string[];
+  selectedColor: string;
+  onSelect: (color: string) => void;
 }
 
 const PRODUCT_COLORS: Record<string, string[]> = {
@@ -18,9 +18,7 @@ export function getColorsForType(type: string): string[] {
   return PRODUCT_COLORS[type] || PRODUCT_COLORS.default;
 }
 
-export default function ColorSelector({ colors }: ColorSelectorProps) {
-  const [selectedColor, setSelectedColor] = useState(0);
-
+export default function ColorSelector({ colors, selectedColor, onSelect }: ColorSelectorProps) {
   return (
     <div className="flex flex-col gap-4 font-satoshi">
       <div className="w-full h-[1px] bg-black/10" />
@@ -31,12 +29,12 @@ export default function ColorSelector({ colors }: ColorSelectorProps) {
         {colors.map((color, index) => (
           <button
             key={index}
-            onClick={() => setSelectedColor(index)}
+            onClick={() => onSelect(color)}
             className="relative w-[37px] h-[37px] rounded-full transition-all duration-200 hover:scale-110 active:scale-95"
             style={{ backgroundColor: color }}
             aria-label={`Color ${index + 1}`}
           >
-            {selectedColor === index && (
+            {selectedColor === color && (
               <svg
                 className="absolute inset-0 m-auto"
                 width="16"
