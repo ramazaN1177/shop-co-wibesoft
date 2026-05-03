@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import ProductInfo from "./ProductInfo";
+import ColorSelector, { getColorsForType } from "./ColorSelector";
 
 interface Product {
   _id: number;
@@ -28,6 +29,8 @@ export default function DetailPageComponent({ product }: DetailPageComponentProp
   // API'den tek görsel geliyor, farklı açılar simüle etmek için aynı görseli kullanıyoruz
   const images = [product.image, product.image, product.image];
   const [selectedImage, setSelectedImage] = useState(0);
+
+  const colors = getColorsForType(product.type);
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 w-full">
@@ -70,7 +73,7 @@ export default function DetailPageComponent({ product }: DetailPageComponentProp
       </div>
 
       {/* Sağ Taraf - Ürün Bilgileri */}
-      <div className="flex-1">
+      <div className="flex-1 flex flex-col gap-4">
         <ProductInfo
           title={product.title}
           rating={product.rating}
@@ -79,6 +82,7 @@ export default function DetailPageComponent({ product }: DetailPageComponentProp
           discountedPrice={product.discountedPrice}
           description={product.description}
         />
+        <ColorSelector colors={colors} />
       </div>
     </div>
   );
