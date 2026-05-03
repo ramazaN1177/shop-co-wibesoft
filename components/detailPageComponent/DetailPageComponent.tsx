@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import ProductInfo from "./ProductInfo";
 
 interface Product {
   _id: number;
@@ -68,9 +69,16 @@ export default function DetailPageComponent({ product }: DetailPageComponentProp
         </div>
       </div>
 
-      {/* Sağ Taraf - Ürün Bilgileri (sonraki aşamada doldurulacak) */}
-      <div className="flex-1 lg:w-[42%]">
-        {/* Placeholder - sonraki commit'te doldurulacak */}
+      {/* Sağ Taraf - Ürün Bilgileri */}
+      <div className="flex-1">
+        <ProductInfo
+          title={product.title}
+          rating={product.rating}
+          price={product.price}
+          oldPrice={product.oldPrice}
+          discountedPrice={product.discountedPrice}
+          description={product.description}
+        />
       </div>
     </div>
   );
