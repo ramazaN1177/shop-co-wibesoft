@@ -59,29 +59,31 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
       
       {/* Ürün Bilgileri */}
-      <div className="flex flex-col gap-[8px]">
-        <h3 className="font-bold text-[20px] leading-tight text-black truncate">
+      <div className="flex flex-col gap-[4px] md:gap-[8px]">
+        <h3 className="font-bold text-[16px] md:text-[20px] leading-tight text-black truncate">
           {product.name}
         </h3>
         
         {/* Değerlendirme */}
-        <div className="flex items-center gap-[10px]">
-          {renderStars(product.rating)}
-          <span className="text-black/60 text-[14px] leading-[19px]">{product.rating}/5</span>
+        <div className="flex items-center gap-[8px] md:gap-[10px]">
+          <div className="scale-[0.8] md:scale-100 origin-left">
+            {renderStars(product.rating)}
+          </div>
+          <span className="text-black/60 text-[12px] md:text-[14px] leading-tight">{product.rating}/5</span>
         </div>
         
         {/* Fiyat ve İndirim */}
-        <div className="flex items-center gap-[10px]">
-          <span className="font-bold text-[24px] leading-[32px] text-black">
+        <div className="flex items-center gap-[6px] md:gap-[10px]">
+          <span className="font-bold text-[20px] md:text-[24px] leading-tight text-black">
             ${product.price}
           </span>
           {product.originalPrice && (
-            <span className="font-bold text-[24px] leading-[32px] text-black/40 line-through">
+            <span className="font-bold text-[20px] md:text-[24px] leading-tight text-black/40 line-through">
               ${product.originalPrice}
             </span>
           )}
           {product.discountPercentage && (
-            <span className="bg-[#FF3333]/10 text-[#FF3333] px-[14px] py-[6px] rounded-[62px] text-[12px] font-medium leading-[16px]">
+            <span className="bg-[#FF3333]/10 text-[#FF3333] px-[8px] md:px-[14px] py-[3px] md:py-[6px] rounded-[62px] text-[10px] md:text-[12px] font-medium leading-tight">
               -{product.discountPercentage}%
             </span>
           )}
